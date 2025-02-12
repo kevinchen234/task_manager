@@ -1,0 +1,46 @@
+<table summary="Task form fields">
+      <tr>
+        <%
+=begin%>
+ <th><%= f.label :name %></th>
+<%
+=end%>
+        <th>Name</th>
+        <td><%= f.text_field :name %></td>
+      </tr>
+      <tr>
+        <%
+=begin%>
+ <th><%= f.label :position %></th>
+<%
+=end%>
+        <th>Position</th>
+        <td><%= f.text_field :position %></td>
+      </tr>
+      <tr>
+        <%
+=begin%>
+ <th><%= f.label :completed %></th>
+<%
+=end%>
+        <th>Completed</th>
+        <td><%= f.check_box :completed %></td>
+      </tr>
+      <tr>
+        <%
+=begin%>
+ <th><%= f.label :description %></th>
+<%
+=end%>
+        <th>Description</th>
+        <td><%= f.text_area :description %></td>
+      </tr>
+      <%
+=begin%>
+ <tr>
+        <th><%= f.label :category_id %></th>
+        <td><%= f.collection_select :category_id, Category.all, :id, :name %></td>
+      </tr>
+<%
+=end%>
+    </table>
