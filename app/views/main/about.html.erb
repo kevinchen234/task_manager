@@ -1,6 +1,13 @@
+<% content_for :title, 'About' %>
+<%= link_to 'Back to Menu', menu_path, class: 'back-link' %><br />
 <h2>About</h2>
 <p> Description of the the Task Manager</p>
 <p>Created by <%= @created_by %> </p>
 
 ID: <%= @id %> <br/>
 Page: <%= @page %> <br/>
+
+<%= content_for(:script) do %>
+  <% name = "Kevin" %>
+  <%= javascript_tag("alert('Welcome, #{j(name)}!')") %>
+<% end %>

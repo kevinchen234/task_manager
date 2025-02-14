@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Task Manager" %></title>
+    <title>Task Manager <%= " - " + yield(:title) if content_for?(:title) %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -18,11 +18,37 @@
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag :application, "data-turbo-track": "reload" %>
+
     <%= javascript_importmap_tags %>
+    <%= yield(:script) %>
   </head>
 
   <body>
-    <%= yield %>
+    <%
+=begin%>
+ <header style="background-image: url('<%= image_path 'gradient.png' %>'); padding: 10px;">
+<%
+=end%>
+    <header>
+      <%= link_to(menu_path) do %>
+        <%= image_tag('task_manager_logo.png', height: 25, alt: 'Task Manager Logo') %>
+      <% end %>
+      <% if session[:user_id].present? %>
+        <span>
+          User: <%= @username %> | <%= button_to('Logout', logout_path, {method: :delete}) %>
+        </span>
+      <% end %>
+    </header>
+
+    <div id="content">
+      <%= render(partial: 'layouts/flash') %>
+      <%= yield %>
+    </div>
+
+    <footer>
+      Copyright <%= Time.now.year %>
+    </footer>
+
   </body>
 </html>

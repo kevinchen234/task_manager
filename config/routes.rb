@@ -1,13 +1,25 @@
 Rails.application.routes.draw do
-  root "main#index"
+  # get "access/menu"
+  # get "access/new"
+  # get "access/create"
+  # get "access/destroy"
+  root "tasks#index"
   # get "categories/index"
   # get "categories/show"
   # get "categories/new"
   # get "categories/edit"
   # get "categories/delete"
 
+  get "menu" => "access#menu"
+  get "login" => "access#new"
+  delete "logout" => "access#destroy"
+  resources :access, controller: "access", only: [ :new, :create, :destroy ] do
+    member do
+      get :menu
+    end
+  end
+
   match "about", to: "main#about", via: :get
-  match "hello", to: "main#hello", via: :get
 
   resources :categories do
     member do
